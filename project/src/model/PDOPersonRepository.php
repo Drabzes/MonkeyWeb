@@ -28,8 +28,30 @@ class PDOPersonRepository implements PersonRepository
             return null;
         }
     }
-}
 
+    public function updatePersonById($id , $name)
+    {
+        try
+        {
+
+            $statement = $this->connection->prepare("UPDATE person set name=? WHERE id=?");
+            $statement->bindParam(1, $name, \PDO::PARAM_STR);
+            $statement->bindParam(2, $id, \PDO::PARAM_INT);
+
+            $statement->execute();
+
+
+
+                return "updated succefull" . $name;
+
+        }
+        catch (\Exception $exception)
+        {
+            return "failed to update";
+        }
+
+    }
+}
 ?>
 
 

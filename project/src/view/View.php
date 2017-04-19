@@ -6,4 +6,6 @@ interface View
 {
     public function show(array $data);
 
+    public function update($status = null);
+
 }

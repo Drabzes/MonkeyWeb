@@ -21,7 +21,21 @@ try {
     $personController = new PersonController($personPDORepository, $personJsonView);
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
-    $personController->handleFindPersonById($id);
+
+    $idd = isset($_POST['id']) ? $_POST['id'] : null;
+    $name = isset($_POST['name']) ? $_POST['name'] : null;
+
+
+    if ($id == null)
+    {
+
+        $personController->updateDatabase($idd, $name);
+
+    }
+    else{
+        $personController->handleFindPersonById($id);
+    }
+
 } catch (Exception $e) {
     echo 'cannot connect to database';
 }
