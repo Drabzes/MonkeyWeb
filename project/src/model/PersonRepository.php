@@ -10,4 +10,6 @@ interface PersonRepository
     public function add(Person $person);
     public function remove($id);
     */
+
+    public function updatePersonById($id, $name);
 }

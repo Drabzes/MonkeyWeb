@@ -21,5 +21,13 @@ class PersonController
         $person = $this->personRepository->findPersonById($id);
         $this->view->show(['person' => $person]);
     }
+
+    public function updateDatabase($id , $name)
+    {
+        $status = $this->personRepository->updatePersonById($id, $name);
+        $this->view->update($status);
+    }
+
+
 }
 

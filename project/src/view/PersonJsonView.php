@@ -14,9 +14,13 @@ class PersonJsonView implements View
             $person = $data['person'];
 
             echo json_encode(['id' => $person->getId(), 'name' => $person->getName()]) . "<br>";
-            echo '<input required  type = "text" name = "subject1" value="' . $person->getName() . '" />' . "<br>";
-            echo '<input required  type = "text" name = "subject1" value="' . $person->getId() . '" />' . "<br>";
-            echo "<td><input type='text' value='". $person->getName() ."/></td>";
+
+
+            echo '<form id="registerDate" method="post" action="app.php">';
+            echo '<input id="name" required  type = "text" name = "subject1" value="' . $person->getName() . '" />' . "<br>";
+            echo '<input id="id" required  type = "text" name = "subject1" value="' . $person->getId() . '" />' . "<br>";
+            echo '<button type=submit> Update Database </button>';
+            echo '</form>';
             /*
             echo "<input type=\"text\"> \n";
             echo "<input type=\"text\"> \n";
@@ -27,7 +31,15 @@ class PersonJsonView implements View
             echo '{}';
         }
     }
+
+    public function update($status = null)
+    {
+        echo $status;
+    }
+
+
 }
 ?>
+
 
 
