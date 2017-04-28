@@ -8,42 +8,30 @@
  */
 class Person extends CI_Controller
 {
-
+    //constructor
     public function __construct()
     {
         parent::__construct();
-        /*
-        $this->load->database();
-        if ($this->db->get('person'))
-        {
-            echo 'connected! ';
-            $query = $this->db->get('person');
-            foreach ($query->result() as $row)
-            {
-                echo $row->id;
-                echo $row->name;
-            }
-        }else{
-            echo 'not connected ';
-        }
-        */
+        //model laden
         $this->load->model('Person_model');
     }
 
     public function index()
     {
-            /*
-            $query = $this->Person_model->getPersons();
-            foreach ($query->result() as $row)
-            {
-                echo $row->id;
-                echo $row->name;
-            }
-        */
-            $data['persons'] = $this->Person_model->getPersons();
-            $data ['title'] = 'Person collection';
+            try{
+                // persoon doorgeven
+                $data['persons'] = $this->Person_model->getPersons();
+                //title van de het blad
+                $data ['title'] = 'Person collection';
 
-            $this->load->view('person', $data);
+                //view laden
+                $this->load->view('person', $data);
+            }
+            catch (Exception $e)
+            {
+                echo $e->getMessage();
+            }
+
     }
 
     public function person_by_id($id)
@@ -53,29 +41,29 @@ class Person extends CI_Controller
 
         $data['person'] = $query->result_array();
 
-
-
-
-
-
-
-        /*
-        $data['$person_item'] = $this->Person_model->getPerson($id);
-        $data ['title'] = 'Person';
-        */
         $this->load->view('personview', $data);
 
     }
-
+    // update database
     public function data_submitted()
     {
-        $data = array(
-            'id' => $this->input->post('u_id'),
-            'name' => $this->input->post('u_name')
-        );
+        try
+        {
+            //data dat moet toegevoegd worden aan de database
+            $data = array(
+                'id' => $this->input->post('u_id'),
+                'name' => $this->input->post('u_name')
+            );
+            //fucntie aanropen uit het model persoon
+            $this->Person_model->updatePerson($data);
+            //view openen als de update gelukt is.
+            $this->load->view('updatesucces');
+        }
+        catch (Exception $e )
+        {
+            echo $e;
+        }
 
-        $this->Person_model->updatePerson($data);
-        echo 'success';
 
     }
 }

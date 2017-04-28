@@ -14,6 +14,7 @@
     <h3><?php echo $person_item['id']; ?></h3>
     <div class="main">
         <?php echo $person_item['name']; ?>
+        <input type=button onClick="location.href='<?php echo $person_item['id'] ?>'" value='click here'
     </div>
 
 <?php endforeach; ?>
